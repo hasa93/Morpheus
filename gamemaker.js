@@ -72,3 +72,8 @@ exports.addProblem = function(req, res){
 	});
 }
 
+exports.alterProblem = function(req, res){
+	Problem.update({_id : req.params.id}, req.body, function(err, problem){
+		
+	});
+}

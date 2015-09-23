@@ -3,8 +3,13 @@ var router = express.Router();
 var gamemaker = require('../gamemaker');
 
 /* GET home page. */
+
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.get('/files', function(req, res){
+	res.render('file', { title : 'File Upload'});
 });
 
 router.post('/api/player/create', gamemaker.createPlayer);

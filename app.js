@@ -5,12 +5,32 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//Initiate and configure multer
+
+var multer = require('multer')({ dest: './upload',
+
+    rename: function(fieldname, filename){
+      return filename + Date.now();
+    },
+
+    onFileUploadStart: function(file){
+      console.log(file + ' uploading ...');
+    },
+
+    onFileUploadComplete: function(file){
+      console.log(file.fieldname + 'uploaded!');
+      uploadDone = true;
+    }});
+
 require('./db.js')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+//Checks whether the file upload has been finished
+var uploadDone = false;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,8 +44,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Config multer for file upload
+
+app.use(multer.single('dream'));
+
+
 app.use('/', routes);
-app.use('/users', users);
+
+routes.post('/api/image', function(req, res){
+
+  if(uploadDone == true) console.log(req.files);
+  res.send("File Uploaded");
+
+});
 
 //initialize db
 
