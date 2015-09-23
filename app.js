@@ -5,11 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 require('./db.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var upload = require('./uploader');
+
+var processor = require('./processor.js');
 
 var app = express();
 
@@ -31,11 +34,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 routes.post('/api/image', upload.single('dream'), function(req, res, next){
-
-  //if(uploadDone == true) console.log(req);
-  res.send("Upload Complemented!");
-  //console.log(req);
+  res.send("Upload Complemented!");  
 });
+
+routes.get('/api/processor/test', processor.testProcess);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
