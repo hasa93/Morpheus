@@ -5,32 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//Initiate and configure multer
-
-var multer = require('multer')({ dest: './upload',
-
-    rename: function(fieldname, filename){
-      return filename + Date.now();
-    },
-
-    onFileUploadStart: function(file){
-      console.log(file + ' uploading ...');
-    },
-
-    onFileUploadComplete: function(file){
-      console.log(file.fieldname + 'uploaded!');
-      uploadDone = true;
-    }});
-
-require('./db.js')
+require('./db.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var upload = require('./uploader');
 
 var app = express();
-
-//Checks whether the file upload has been finished
-var uploadDone = false;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,21 +25,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Config multer for file upload
-
-app.use(multer.single('dream'));
+//app.use(upload.single('dream'));
 
 
 app.use('/', routes);
 
-routes.post('/api/image', function(req, res){
+routes.post('/api/image', upload.single('dream'), function(req, res, next){
 
-  if(uploadDone == true) console.log(req.files);
-  res.send("File Uploaded");
-
+  //if(uploadDone == true) console.log(req);
+  res.send("Upload Complemented!");
+  //console.log(req);
 });
-
-//initialize db
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
