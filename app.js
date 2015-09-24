@@ -27,17 +27,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use(upload.single('dream'));
-
-
 app.use('/', routes);
 
 //uploads the image to server
 routes.post('/api/image', upload.single('dream'), function(req, res, next){
 
     q.push(function(process){
-      processor.runDreamer('ls -la');
-      console.log(q);  
+      
+      var command = req.file.originalname
+      command = "python ./caffe/3-step-easy.py -l inception_4c/output -b ./caffe/bvlc_googlenet -i ./upload/" + command + "* -o ./dreams/dream_in_" + command;
+      
+      console.log(q);
+      processor.runDreamer(command);
+        
     });
     
 
@@ -46,7 +48,7 @@ routes.post('/api/image', upload.single('dream'), function(req, res, next){
       console.log(q);
     });
 
-    console.log(q);
+    //console.log(req.file);
     res.send("Upload Completed!"); 
 
 });
