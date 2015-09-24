@@ -1,4 +1,6 @@
-
+caffe
 data
 node_modules
-
+upload
+dream
+tmp.prototxt
