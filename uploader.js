@@ -11,9 +11,20 @@ var storage = multer.diskStorage({
 
 	filename: function(req, file, cb){
 		cb(null, file.originalname + '-' + Date.now());
-	}
+	},
+
+
 });
 
-var upload = multer({storage: storage});
+var fileFilter = function(req, file, cb){
+	
+	if(file.mimetype !== 'image/jpeg'){
+		return cb(new Error('Only jpegs are allowed!'));
+	}
+
+	cb(null, true);
+}
+
+var upload = multer({ storage: storage, fileFilter: fileFilter });
 
 module.exports = upload;
