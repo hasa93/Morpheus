@@ -4,12 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var queue = require('queue');
 
 require('./db.js');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var upload = require('./uploader');
 
 var processor = require('./processor.js');
@@ -34,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 routes.post('/api/image', upload.single('dream'), function(req, res, next){
-  res.send("Upload Complemented!");  
+  res.send("Upload Completed!");  
 });
 
 routes.get('/api/processor/test', processor.testProcess);
