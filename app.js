@@ -4,14 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var queue = require('queue');
+var q = require('queue')();
 
 require('./db.js');
 
 var routes = require('./routes/index');
 var upload = require('./uploader');
 
-var processor = require('./processor.js');
+var processor = require('./processor');
 
 var app = express();
 
@@ -32,11 +32,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
+//uploads the image to server
 routes.post('/api/image', upload.single('dream'), function(req, res, next){
-  res.send("Upload Completed!");  
-});
 
-routes.get('/api/processor/test', processor.testProcess);
+    q.push(function(process){
+      processor.runDreamer('ls -la');
+      console.log(q);  
+    });
+    
+
+    q.start(function(err){
+      if(err) console.log(err);
+      console.log(q);
+    });
+
+    console.log(q);
+    res.send("Upload Completed!"); 
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,8 +82,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(3000, function(){
-	console.log("Listening!");
+app.listen(3000, function(){ 
+  console.log("Listening!");
 });
 
 module.exports = app;

@@ -23,6 +23,4 @@ router.post('/api/problem/create', gamemaker.addProblem);
 router.get('/api/problem/get', gamemaker.getGps);
 router.get('/api/problem/list', gamemaker.listProblems);
 
-router.post('/api/processor/run', processor.runScript);
-
 module.exports = router;
