@@ -2,8 +2,8 @@
 
 var childProcess = require('child-process-promise');
 
-exports.runDreamer = function(command){
-	command = command || 'ls -l';
+exports.runDreamer = function(filename, destname){
+	command = "python ./caffe/3-step-easy.py -l inception_4c/output -b ./caffe/bvlc_googlenet -i ./upload/" + filename + "* -o ./dreams/" + destname;
 
 	childProcess.exec(command).then(function(result){
 		console.log(result.stdout + ' : ' + result.stderr);

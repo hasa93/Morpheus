@@ -28,8 +28,8 @@ var ImageSchema = new Schema({
 	
 	upload_name : String,
 	dream_name : String,
-	IsProcessed : { type : Boolean, default : false }
-
+	IsProcessed : { type : Boolean, default : false },
+	timestamp : { type : Date, default : Date.now }
 });
 
 mongoose.model('Image', ImageSchema);

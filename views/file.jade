@@ -4,6 +4,6 @@ extends layout
 block content
 	h1 Upload Your Files Here
 
-	form(id="uploadForm", enctype="multipart/form-data", action="/api/image", method="post")
+	form(id="uploadForm", enctype="multipart/form-data", action="/api/image/process", method="post")
 		input(type="file", name="dream")
 		input(type="submit", value="Upload", name="submit")

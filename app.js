@@ -4,14 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var q = require('queue')();
+//var q = require('queue')();
 
 require('./db.js');
 
 var routes = require('./routes/index');
-var upload = require('./uploader');
+var upload = require('./uploader')(routes);
 
-var processor = require('./processor');
+//var processor = require('./processor');
 
 var app = express();
 
@@ -30,18 +30,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 //uploads the image to server
-routes.post('/api/image', upload.single('dream'), function(req, res, next){
+/*routes.post('/api/image', upload.single('dream'), function(req, res, next){
 
       console.log(req);
+
+      var fname = req.file.originalname;
       
-      q.push(function(cb){
-      
-      var command = req.file.originalname
-      command = "python ./caffe/3-step-easy.py -l inception_4c/output -b ./caffe/bvlc_googlenet -i ./upload/" + command + "* -o ./dreams/dream_in_" + command;
-   
-      processor.runDreamer(command);
-        
-    });
+      q.push(function(cb){      
+        processor.runDreamer(fname);        
+      });
     
 
     q.start(function(err){
@@ -52,7 +49,7 @@ routes.post('/api/image', upload.single('dream'), function(req, res, next){
     //console.log(req.file);
     res.send("Upload Completed!"); 
 
-});
+});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
