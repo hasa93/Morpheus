@@ -11,6 +11,8 @@ module.exports = function(router){
 
 	var q = require('queue')({ concurrency : maxPending });
 
+	console.log(q);
+
     q.on('success', function(err, job){
     	if(err) console.log(err);
 
@@ -51,20 +53,37 @@ module.exports = function(router){
 
 		 i.save(function(err, fb){
 		 	if(err) console.log(err);
+		 });
 
-		 	q.push(function(cb){
-		 		processor.runDreamer(fb.upload_name, fb.dream_name);
-		 		cb();
-		 	});
+		 Img.find({ IsProcessed : false }).sort({ timestamp : 1 }).exec(function(err, images){
+		 	if(err) console.log(err);
+		 	getUnprocessed(images);
 
-		 	q.start(function(err){
-		 		if(err) console.log(err);
-		 	});
+		 });
 
+		 console.log("Len: " + q.length);	
 
+		 q.start(function(err){
+		  	console.log('Finished!');			
 		 });
 
 		 res.send('Upload Completed!');
 	});
+
+	
+	function getUnprocessed(data){		 
+		
+		for(var i = 0; i < data.length; i++){
+
+			q.push(function(cb){
+				processor.runDreamer(data[i].upload_name, data[i].dream_name);
+				cb();
+			});
+
+			Img.update({ _id : data[i]._id}, { IsProcessed : true }, function(err, data){
+				if(err) console.log(err);
+			});
+		}
+	}
 	
 }
