@@ -29,28 +29,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-//uploads the image to server
-/*routes.post('/api/image', upload.single('dream'), function(req, res, next){
-
-      console.log(req);
-
-      var fname = req.file.originalname;
-      
-      q.push(function(cb){      
-        processor.runDreamer(fname);        
-      });
-    
-
-    q.start(function(err){
-      if(err) console.log(err);
-      console.log(q);
-    });
-
-    //console.log(req.file);
-    res.send("Upload Completed!"); 
-
-});*/
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -83,7 +61,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(3000, function(){ 
-  console.log("Listening!");
+  console.log("Listening!");  
 });
 
 module.exports = app;
