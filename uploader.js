@@ -7,18 +7,18 @@ module.exports = function(router){
 	var imgcontroller = require('./imageController');
 	var Img = mongoose.model('Image');
 
-	var maxPending = 3;
+	var async = require('async');
 
-	var q = require('queue')({ concurrency : maxPending });
+	var q = async.queue(function(task, callback){
+		console.log('Q initiated!');
+		processor.runDreamer(task.upload_name, task.dream_name, callback);
+		//callback();
+	}, 2);
 
-	console.log(q);
+	q.drain = function() {
+		console.log('Processing Finished!');
+	}
 
-    q.on('success', function(err, job){
-    	if(err) console.log(err);
-
-    	console.log('Processing Comleted!');
-	});
-	
 	//Configuring multer
 
 	var storage = multer.diskStorage({
@@ -52,38 +52,15 @@ module.exports = function(router){
 		 var i = Img({ upload_name : fname, dream_name : 'dd_' + fname });
 
 		 i.save(function(err, fb){
-		 	if(err) console.log(err);
-		 });
+		 	if(err) console.log(err);	
 
-		 Img.find({ IsProcessed : false }).sort({ timestamp : 1 }).exec(function(err, images){
-		 	if(err) console.log(err);
-		 	getUnprocessed(images);
-
-		 });
-
-		 console.log("Len: " + q.length);	
-
-		 q.start(function(err){
-		  	console.log('Finished!');			
+		    q.push(fb, function(err){
+		    	console.log('Image Pushed!')
+		    	console.log(err);
+		    } );
 		 });
 
 		 res.send('Upload Completed!');
 	});
 
-	
-	function getUnprocessed(data){		 
-		
-		for(var i = 0; i < data.length; i++){
-
-			q.push(function(cb){
-				processor.runDreamer(data[i].upload_name, data[i].dream_name);
-				cb();
-			});
-
-			Img.update({ _id : data[i]._id}, { IsProcessed : true }, function(err, data){
-				if(err) console.log(err);
-			});
-		}
-	}
-	
 }
