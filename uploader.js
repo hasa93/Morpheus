@@ -9,14 +9,21 @@ module.exports = function(router){
 
 	var async = require('async');
 
-	var q = async.queue(function(task, callback){
-		console.log('Q initiated!');
-		processor.runDreamer(task.upload_name, task.dream_name, callback);
+	var q = async.queue(function(task, callback){		
+		processor.runDreamer(task.upload_name, task.dream_name, callback);		
 		//callback();
 	}, 2);
 
+	Img.find({ IsProcessed : false }).sort({ timestamp : 1 }).exec(function(err, images){
+
+		for(var i = 0; i < images.length; i++){
+			enqueue(images[i]);
+		}
+
+	});
+	
 	q.drain = function() {
-		console.log('Processing Finished!');
+		console.log('Queue drained!');		
 	}
 
 	//Configuring multer
@@ -52,15 +59,24 @@ module.exports = function(router){
 		 var i = Img({ upload_name : fname, dream_name : 'dd_' + fname });
 
 		 i.save(function(err, fb){
-		 	if(err) console.log(err);	
-
-		    q.push(fb, function(err){
-		    	console.log('Image Pushed!')
-		    	console.log(err);
-		    } );
+		 	if(err) console.log(err);
+		 	enqueue(fb);
 		 });
 
 		 res.send('Upload Completed!');
 	});
+
+	function enqueue(item){
+
+		q.push(item, function(err){
+			if(err) console.log(err);
+
+			Img.update({ _id : item._id }, { IsProcessed : true }, function(err, item){
+				if(err) console.log(err);
+				console.log('Processed image: ' + item.upload_name);
+			});
+			
+		});		
+	}
 
 }
