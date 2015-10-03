@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<link rel='import' href='../polymer/polymer.html'>
+		<link rel='import' href='../iron-form/iron-form.html'>
+		<link rel='import' href='../paper-button/paper-button.html'>
+		<link rel='import' href='../paper-card/paper-card.html'>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'> </script>
+	</head>
+
+	<body>
+
+		<dom-module id="ripple-card">
+
+			<style>
+				paper-ripple{
+					color: #ffd;							
+				}
+
+				.card{
+					position: relative;
+					height: 100%;
+					width: 100%;
+				}
+
+				#ripple-label{
+					position: relative;
+					font-size: 12vmin;
+					color: #fff;
+					padding-top: 8vh;
+					padding-bottom: 7vh;
+					text-align: center;
+				}
+
+			</style>
+
+			<template>
+				<div class='card'>
+					<div id='ripple-label' >{{title}}</div>
+					<paper-ripple recenters></paper-ripple>
+				</div>
+			</template>
+
+		</dom-module>
+
+		<script>	
+			Polymer({
+				is: 'ripple-card',
+				properties: {
+					title: String
+				}
+			});
+		</script>
+
+	</body>
+
+</html>

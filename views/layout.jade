@@ -2,6 +2,19 @@ doctype html
 html
   head
     title= title
+
+    script(src='/webcomponentsjs/webcomponents-lite.min.js')
+    meta(name='viewport', content='width=device-width', initial_scale='1')
+
+    link(href='https://fonts.googleapis.com/css?family=Roboto', rel='stylesheet', type='text/css')    
+    link(rel='import', href='/polymer/polymer.html')
+    link(rel='import', href='/paper-button/paper-button.html')
+    link(rel='import', href='/paper-card/paper-card.html')
+    link(rel='import', href='/iron-flex-layout/classes/iron-flex-layout.html')
+    link(rel='import', href='/paper-header-panel/paper-header-panel.html')
+    link(rel='import', href='/elements/uploader-element.html')
+    link(rel='import', href='/elements/ripple-card-element.html')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+
+  body(fullbleed unresolved layout vertical)
     block content

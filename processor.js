@@ -2,8 +2,13 @@
 
 var childProcess = require('child-process-promise');
 
-exports.runDreamer = function(filename, destname, callback){
-	command = "python ./caffe/3-step-easy.py -l inception_4c/output -b ./caffe/bvlc_googlenet -i ./upload/" + filename + " -o ./dreams/" + destname +".jpg";
+var layers = ['inception_3b/5x5_reduce']
+
+exports.runDreamer = function(filename, destname, layer, callback){
+
+	var cnnLyr = layers[layer] || 'inception_4c/output';
+
+	command = "python ./caffe/3-step-easy.py -l " + cnnLyr + " -b ./caffe/bvlc_googlenet -i ./upload/" + filename + " -o ./dreams/" + destname +".jpg";
 
 	childProcess.exec(command, function(err, stdout, stderr){
 		if(err) console.log(err);
