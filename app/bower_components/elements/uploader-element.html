@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<link rel='import' href='../polymer/polymer.html'>
+		<link rel='import' href='../iron-form/iron-form.html'>
+		<link rel='import' href='../paper-button/paper-button.html'>
+		<link rel='import' href='../paper-card/paper-card.html'>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'> </script>
+	</head>
+
+	<body>
+
+		<dom-module id="img-uploader">
+
+			<template>
+
+				<paper-card id='preview'>
+					<paper-material elevation='1'>
+						<card-content>
+							Upload Ready!
+						</card-content>
+					</paper-material>
+				</paper-card>
+
+				<form id='uploader' enctype='multipart/form-data' action='/api/image/process' method='post'>
+					<input onchange='loadFile(event)' id='file-dialog' type='file' style='display:none'>
+					<paper-button raised id='submit-button' on-tap='clicked'> Submit </paper-button>
+				</form>		
+				
+			</template>
+
+		</dom-module>
+
+		<script>			
+
+			Polymer({
+				is: "img-uploader",
+
+				isPosted: {
+					type: Boolean,
+					value: false
+				},
+
+				clicked: function(){
+					if(this.isPosted === true){
+						console.log('form-data');
+						this.isPosted = false;
+					}
+					else{
+						$('#file-dialog').trigger('click');	
+						this.isPosted = true;										
+					}
+
+				}
+			});
+
+			var loadFile = function(event){
+				var output = document.getElementById('preview');
+				output.image = URL.createObjectURL(event.target.files[0]);
+			};
+			
+		</script>
+
+	</body>
+
+</html>
