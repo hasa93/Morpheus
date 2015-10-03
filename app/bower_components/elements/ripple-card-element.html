@@ -35,8 +35,9 @@
 
 			<template>
 				<div class='card'>
-					<div id='ripple-label' >{{title}}</div>
+					<div id='ripple-label'>{{title}}</div>
 					<paper-ripple recenters></paper-ripple>
+					<input id="file-upload" type="file" style="display:none">					
 				</div>
 			</template>
 
@@ -49,6 +50,13 @@
 					title: String
 				}
 			});
+
+			$('document').ready(function(){
+				$('#card').click(function(){
+					$('#file-upload').trigger('click');
+				});
+			});
+
 		</script>
 
 	</body>
