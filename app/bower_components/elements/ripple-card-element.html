@@ -4,7 +4,7 @@
 		<link rel='import' href='../iron-form/iron-form.html'>
 		<link rel='import' href='../paper-button/paper-button.html'>
 		<link rel='import' href='../paper-card/paper-card.html'>
-		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'> </script>
+	
 	</head>
 
 	<body>
@@ -34,10 +34,10 @@
 			</style>
 
 			<template>
-				<div class='card'>
+				<input type='file' id='uploader' style='display:none'>
+				<div class='card' onclick='openFiles()'>
 					<div id='ripple-label'>{{title}}</div>
-					<paper-ripple recenters></paper-ripple>
-					<input id="file-upload" type="file" style="display:none">					
+					<paper-ripple recenters></paper-ripple>				
 				</div>
 			</template>
 
@@ -51,11 +51,11 @@
 				}
 			});
 
-			$('document').ready(function(){
-				$('#card').click(function(){
-					$('#file-upload').trigger('click');
-				});
-			});
+			function openFiles()
+			{
+				$('#uploader').trigger('click');
+				console.log('Clicked!');
+			}
 
 		</script>
 
