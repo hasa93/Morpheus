@@ -19,16 +19,23 @@
 				.card{
 					position: relative;
 					height: 100%;
-					width: 100%;
+					width: 100%;					
 				}
 
 				#ripple-label{
 					position: relative;
-					font-size: 12vmin;
+					font-size: 16vmin;
 					color: #fff;
-					padding-top: 8vh;
-					padding-bottom: 7vh;
+					padding-top: 2vh;
+					padding-bottom: 2vh;
 					text-align: center;
+				}
+
+				#ripple-sub{
+					position: relative;
+					text-align: center;
+					font-size: 5vmin;
+					color: #fff;					
 				}
 
 				input{
@@ -45,7 +52,8 @@
 
 				<div class='card' onclick='handleFiles()'>
 					<div id='ripple-label'>{{title}}</div>
-					<paper-ripple recenters></paper-ripple>				
+					<div id='ripple-sub'> Tap Here </div>
+					<paper-ripple circle></paper-ripple>				
 				</div>
 			</template>
 

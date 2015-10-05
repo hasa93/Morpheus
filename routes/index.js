@@ -5,7 +5,7 @@ var imgController = require('../imageController');
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Morpheus 1.0' });
 });
 
 router.get('/files', function(req, res){

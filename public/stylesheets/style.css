@@ -7,22 +7,13 @@ html,body{
 	width: 100vw;
 }
 
-paper-header-panel{
-	height: 15%;
-}
-
-paper-button {
-	background: green;
-	color: #fff;				
-}
-
 paper-ripple{
 	color: #fff;
 }
 
 .paper-header{
 	background-color: #2980b9;
-	height: 60px;
+	/*height: 60px;*/
 	font-size: 16px;
 	line-height: 60px;
 	padding: 0 10px;
@@ -30,33 +21,57 @@ paper-ripple{
 	text-align: center;
 }
 
-.paper-card {
-	height: 150px;
-	max-width: 320px;
-	margin: 16px auto;
-	background-color: #fff;
+paper-header-panel{
+	height: 15%;
 }
 
-
-.flex-container{
+.logo-flex-container{
 	display: flex;	
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	position: relative;
-	height: 100%;	
 }
 
 .logo-text{
-	font-size: 200px;
+	font-size: 47vmin;
 	color: #fff;
 }
 
 .paper-container{
 	margin-right: 1%;
 	margin-left: 1%;
-	height: 40%;
-	width: 50%;
+	position: relative;
 }
 
+.over-all-flex{
+	display: flex;
+	flex-direction: column;
+	align-items: center;	
+	justify-content: center;
+	height: 80vh;
+	width: 100vw;		
+}
 
+.button-flex-container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 20vh;
+	width: 70vh;
+}
+
+paper-fab{
+	width: 14.3vmin;
+	height: 14.5vmin;
+	margin-right: 10%;
+	margin-left: 10%;
+}
+
+#info{
+	background: #2ecc71;
+}
+
+#gallery{
+	background: #f39c12;
+}
