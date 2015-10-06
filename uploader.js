@@ -63,7 +63,7 @@ module.exports = function(router){
 		 	enqueue(fb);
 		 });
 
-		 res.send('Upload Completed!');
+		 res.render('index', { title : 'Morpheus 1.0' });
 	});
 
 	function enqueue(item){

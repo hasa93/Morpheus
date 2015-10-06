@@ -16,8 +16,8 @@ function handleFiles(){
 }
 
 $('document').ready(function(){
-	$('#info').on('click', function(message){
-		console.log(message);
+	$('#info').on('click', function(event){
+		event.stopPropagation();
 		console.log('Clicked!');
 	});
 });

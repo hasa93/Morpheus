@@ -1,0 +1,49 @@
+{
+  "name": "animated-gallery",
+  "description": "Material design animated gallery",
+  "license": "MIT",
+  "main": "animated-gallery.html",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "material",
+    "design",
+    "Google",
+    "gallery",
+    "images",
+    "animated",
+    "animation",
+    "neon-animation",
+    "ajax",
+    "iron-ajax"
+  ],
+  "ignore": [
+    "**/.*",
+    "bower_components"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "authors": [
+    {
+      "name": "Joe Wells",
+      "email": "joe.wells7777@gmail.com",
+      "homepage": "http://github.com/JoeWells"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JoeWells/animated-gallery.git"
+  },
+  "homepage": "https://github.com/JoeWells/animated-gallery",
+  "_release": "0542cf21a8",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "0542cf21a8a93b98b5ca120697b49d714fa4610b"
+  },
+  "_source": "git://github.com/JoeWells/animated-gallery.git",
+  "_target": "*",
+  "_originalSource": "animated-gallery",
+  "_direct": true
+}
