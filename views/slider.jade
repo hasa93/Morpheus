@@ -1,0 +1,10 @@
+.slider
+    .slide(ng-repeat='image in images', ng-show='image.visible')
+        img(ng-src='img/{{image.src}}')
+      | &#x9;
+      .arrows
+        a(href='#', ng-click='prev()')
+          img(src='img/left-arrow.png')
+        |  
+        a(href='#', ng-click='next()')
+          img(src='img/right-arrow.png')
