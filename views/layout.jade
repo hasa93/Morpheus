@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app="sliderApp")
   head
     title= title
 
@@ -20,6 +20,11 @@ html
     link(rel='import', href='/iron-icons/iron-icons.html')
     link(rel='stylesheet', href='/stylesheets/style.css')
 
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
+    script(src='http://code.angularjs.org/1.2.9/angular.min.js', type='text/javascript')
+    script(src='http://code.angularjs.org/1.2.9/angular-animate.min.js')
+    script(src='/js/app.js')
 
-  body(fullbleed unresolved layout vertical)
+
+  body(fullbleed unresolved layout vertical ng-controller='SliderController')
     block content

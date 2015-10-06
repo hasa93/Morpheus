@@ -52,7 +52,7 @@
 
 				<div class='card' onclick='handleFiles()'>
 					<div id='ripple-label'>{{title}}</div>
-					<div id='ripple-sub'> Tap to Upload </div>
+					<div id='ripple-sub'>{{subtitle}}</div>
 					<paper-ripple circle></paper-ripple>				
 				</div>
 			</template>
@@ -64,7 +64,8 @@
 			Polymer({
 				is: 'ripple-card',
 				properties: {
-					title: String
+					title: String,
+					subtitle: String
 				}
 			});
 		</script>

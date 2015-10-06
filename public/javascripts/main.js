@@ -3,11 +3,20 @@ var prevUploaded = false;
 
 function handleFiles(){
 	
+	var file;
+
 	if(prevUploaded === false){
-		$('#file').trigger('click');		
+		$('#file').trigger('click');
+
+		file = $('#file')[0].files[0];
+
+		if(file){
+			$('#logo').attr('title', '>>');
+			$('#logo').attr('subtitle', 'Dreamify Me!');
+	  }
 	}	
 	else {		
-		var file = $('#file')[0].files[0];
+		
 		if(file) $('#submitter').trigger('click');		
 	}	
 
@@ -16,8 +25,7 @@ function handleFiles(){
 }
 
 $('document').ready(function(){
-	$('#info').on('click', function(message){
-		console.log(message);
+	$('#info').on('click', function(message){		
 		console.log('Clicked!');
 	});
 });
