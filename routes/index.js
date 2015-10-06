@@ -5,11 +5,15 @@ var imgController = require('../imageController');
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Morpheus 1.0' });
 });
 
-router.get('/files', function(req, res){
+/*router.get('/files', function(req, res, next){
 	res.render('file', { title : 'File Upload'});
+});*/
+
+router.get('/gallery', function(req, res, next){
+	res.render('gallery', {title: 'Morpheus Gallery'});
 });
 
 router.get('/api/images/list', imgController.listImages);

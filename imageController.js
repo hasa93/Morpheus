@@ -19,9 +19,7 @@ exports.addImage = function(req, res){
 exports.listImages = function(req, res){
 
 	Img.find(function(err, images){
-
 		if(err) console.log(err);
-
 		res.json(images);		
 	});
 }

@@ -3,11 +3,17 @@ extends layout
 block content
   
   paper-header-panel(mode='standard')
-    .paper-header Freakyfy!
-  
-  .flex-container
-    .logo-text {
-    .paper-container
-      ripple-card(title='Morpheus 1.0')
-    .logo-text }
-  
+    .paper-header Dreamify!
+
+  .over-all-flex  
+
+    .logo-flex-container    
+      .logo-text {
+      .paper-container
+        ripple-card(title='Morpheus 1.0', subtitle='tap to upload', id='logo')
+      .logo-text }
+    
+    .button-flex-container
+      paper-fab(id='info', icon='help-outline') 
+      paper-fab(id='gallery', icon='view-array') 
+       

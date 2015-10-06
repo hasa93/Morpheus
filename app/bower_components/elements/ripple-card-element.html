@@ -4,7 +4,7 @@
 		<link rel='import' href='../iron-form/iron-form.html'>
 		<link rel='import' href='../paper-button/paper-button.html'>
 		<link rel='import' href='../paper-card/paper-card.html'>
-		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'> </script>
+	
 	</head>
 
 	<body>
@@ -19,44 +19,55 @@
 				.card{
 					position: relative;
 					height: 100%;
-					width: 100%;
+					width: 100%;					
 				}
 
 				#ripple-label{
 					position: relative;
-					font-size: 12vmin;
+					font-size: 16vmin;
 					color: #fff;
-					padding-top: 8vh;
-					padding-bottom: 7vh;
+					padding-top: 2vh;
+					padding-bottom: 2vh;
 					text-align: center;
+				}
+
+				#ripple-sub{
+					position: relative;
+					text-align: center;
+					font-size: 5vmin;
+					color: #fff;					
+				}
+
+				input{
+					display: none;
 				}
 
 			</style>
 
 			<template>
-				<div class='card'>
+				<form id="uploader" method="post" enctype="multipart/form-data" action="/api/image/process">
+					<input type="file" id="file" name="dream">
+					<input type="submit" id="submitter" name="submit">
+				</form>
+
+				<div class='card' onclick='handleFiles()'>
 					<div id='ripple-label'>{{title}}</div>
-					<paper-ripple recenters></paper-ripple>
-					<input id="file-upload" type="file" style="display:none">					
+					<div id='ripple-sub'>{{subtitle}}</div>
+					<paper-ripple circle></paper-ripple>				
 				</div>
 			</template>
 
 		</dom-module>
 
 		<script>	
+
 			Polymer({
 				is: 'ripple-card',
 				properties: {
-					title: String
+					title: String,
+					subtitle: String
 				}
 			});
-
-			$('document').ready(function(){
-				$('#card').click(function(){
-					$('#file-upload').trigger('click');
-				});
-			});
-
 		</script>
 
 	</body>

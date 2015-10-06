@@ -10,8 +10,7 @@ module.exports = function(router){
 	var async = require('async');
 
 	var q = async.queue(function(task, callback){		
-		processor.runDreamer(task.upload_name, task.dream_name, 0, callback);		
-		//callback();
+		processor.runDreamer(task.upload_name, task.dream_name, 0, callback);	
 	}, 2);
 
 	Img.find({ IsProcessed : false }).sort({ timestamp : 1 }).exec(function(err, images){
@@ -63,7 +62,7 @@ module.exports = function(router){
 		 	enqueue(fb);
 		 });
 
-		 res.send('Upload Completed!');
+		 res.redirect('/');
 	});
 
 	function enqueue(item){
