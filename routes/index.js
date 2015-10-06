@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/gallery', function(req, res, next) {
+  res.render('gallery');
+});
+
 router.get('/files', function(req, res){
 	res.render('file', { title : 'File Upload'});
 });
